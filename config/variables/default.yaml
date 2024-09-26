@@ -1,0 +1,89 @@
+
+
+# what is AuxDyn
+
+AnalysisMuonsAuxDyn: [
+  pt, eta, phi,
+]
+AnalysisElectronsAuxDyn: [
+  pt, eta, phi,
+]
+AnalysisJetsAuxDyn: [
+  m, pt, eta, phi,
+  JetConstitScaleMomentum_eta,
+  JetConstitScaleMomentum_phi,
+  JetConstitScaleMomentum_pt,
+  JetConstitScaleMomentum_m,
+  HadronConeExclTruthLabelID,
+  ActiveArea4vec_eta,
+  ActiveArea4vec_m,
+  ActiveArea4vec_phi,
+  ActiveArea4vec_pt,
+  DFCommonJets_QGTagger_NTracks,
+  TrackWidthPt1000,
+  EnergyPerSampling,
+  GhostTrack,
+  GhostMuonSegmentCount,
+  NumTrkPt1000, 
+  NumTrkPt500,
+  SumPtChargedPFOPt500,
+  btaggingLink.m_persKey,
+  btaggingLink.m_persIndex,
+  ]
+
+BTagging_AntiKt4EMPFlowAuxDyn: [
+  DL1dv01_pb,
+  DL1dv01_pc,
+  DL1dv01_pu,
+  GN2v00_pb,
+  GN2v00_pc,
+  GN2v00_pu,
+]
+
+InDetTrackParticlesAuxDyn:
+  [
+  phi
+  , numberOfPixelHits
+  , numberOfPixelHoles
+  , numberOfPixelSharedHits
+  , numberOfPixelDeadSensors
+  , numberOfSCTHits
+  , numberOfSCTHoles
+  , numberOfSCTSharedHits
+  , numberOfSCTDeadSensors
+  , qOverP
+  , numberOfInnermostPixelLayerHits
+  , TTVA_AMVFVertices
+  , TTVA_AMVFWeights
+  , chiSquared
+  , numberDoF
+  , d0
+  , z0
+  , theta
+  , vz
+  , numberOfTRTHits
+  , numberOfTRTOutliers
+  , truthParticleLink/InDetTrackParticlesAuxDyn.truthParticleLink.m_persKey
+  , truthParticleLink/InDetTrackParticlesAuxDyn.truthParticleLink.m_persIndex
+  ]
+
+EventInfoAuxDyn: [
+  eventNumber
+  ,mcEventNumber
+  ,actualInteractionsPerCrossing
+  ,averageInteractionsPerCrossing
+  ,RandomRunNumber
+  ,mcChannelNumber
+  ,PileupWeight_NOSYS
+  ,runNumber
+  ,lumiBlock
+  ,mcEventWeights
+  ]
+
+TruthTopAuxDyn: [
+  m,
+px,
+py,
+pz,
+e,
+]

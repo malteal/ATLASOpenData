@@ -1,0 +1,6 @@
+
+
+
+glob_to_data: /srv/beegfs/scratch/groups/rodem/ATLASOpenData/physlite/
+
+data_path: ${paths.glob_to_data}/80017/

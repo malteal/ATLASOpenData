@@ -1,0 +1,73 @@
+tree: CollectionTree;1
+paths:
+  glob_to_data: /srv/beegfs/scratch/groups/rodem/ATLASOpenData/physlite/
+  data_path: ${paths.glob_to_data}/80017/
+variables:
+  AnalysisJetsAuxDyn:
+  - m
+  - pt
+  - eta
+  - phi
+  - JetConstitScaleMomentum_eta
+  - JetConstitScaleMomentum_phi
+  - JetConstitScaleMomentum_pt
+  - JetConstitScaleMomentum_m
+  - HadronConeExclTruthLabelID
+  - ActiveArea4vec_eta
+  - ActiveArea4vec_m
+  - ActiveArea4vec_phi
+  - ActiveArea4vec_pt
+  - DFCommonJets_QGTagger_NTracks
+  - TrackWidthPt1000
+  - EnergyPerSampling
+  - GhostTrack
+  - GhostMuonSegmentCount
+  - NumTrkPt1000
+  - NumTrkPt500
+  - SumPtChargedPFOPt500
+  BTagging_AntiKt4EMPFlowAuxDyn:
+  - DL1dv01_pb
+  - DL1dv01_pc
+  - DL1dv01_pu
+  - GN2v00_pb
+  - GN2v00_pc
+  - GN2v00_pu
+  InDetTrackParticlesAuxDyn:
+  - phi
+  - numberOfPixelHits
+  - numberOfPixelHoles
+  - numberOfPixelSharedHits
+  - numberOfPixelDeadSensors
+  - numberOfSCTHits
+  - numberOfSCTHoles
+  - numberOfSCTSharedHits
+  - numberOfSCTDeadSensors
+  - qOverP
+  - numberOfInnermostPixelLayerHits
+  - TTVA_AMVFVertices
+  - TTVA_AMVFWeights
+  - chiSquared
+  - numberDoF
+  - d0
+  - z0
+  - theta
+  - vz
+  - numberOfTRTHits
+  - numberOfTRTOutliers
+  EventInfoAuxDyn:
+  - eventNumber
+  - mcEventNumber
+  - actualInteractionsPerCrossing
+  - averageInteractionsPerCrossing
+  - RandomRunNumber
+  - mcChannelNumber
+  - PileupWeight_NOSYS
+  - runNumber
+  - lumiBlock
+  - mcEventWeights
+  TruthTopAuxDyn:
+  - m
+  - px
+  - py
+  - pz
+  - e

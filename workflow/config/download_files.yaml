@@ -1,0 +1,20 @@
+
+
+workdir: /srv/beegfs/scratch/groups/rodem/ATLASOpenData/
+scriptdir: /home/users/a/algren/work/atlas_open_data/physlite/
+
+pipeline:
+  get_location: False
+  download_files: True
+
+recid: 
+  # 80000: [
+    # 37001626,
+    # 37001628,
+    # ]
+  80017: [
+  #   37744531,
+  #   37621239,
+    ]
+
+

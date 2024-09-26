@@ -1,0 +1,39 @@
+# data science / plotting
+numpy
+matplotlib
+scipy
+seaborn
+scikit-learn
+pandas
+numba
+uproot
+
+# wandb/hydra
+omegaconf
+hydra-core
+wandb
+plotly # required for wandb (i think)
+
+# tests
+black
+coverage
+darglint
+flake8
+isort
+pylint
+pytest-cov
+pytest
+
+# misc
+h5py
+jupyter
+tqdm
+jupyterlab
+python-gitlab
+pyrootutils
+pyjet
+ipykernel
+
+# workflow
+snakemake-executor-plugin-slurm==0.4.1 
+snakemake==8.4.1

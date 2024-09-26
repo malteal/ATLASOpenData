@@ -1,0 +1,8 @@
+
+
+defaults:
+  - _self_
+  - paths: default.yaml
+  - variables: default.yaml
+
+tree: CollectionTree;1
