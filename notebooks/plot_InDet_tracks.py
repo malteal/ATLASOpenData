@@ -4,7 +4,8 @@ from glob import glob
 
 # external packages
 import hydra
-import uproot
+from tqdm import tqdm
+import sys
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -21,29 +22,18 @@ from tools import misc, hydra_utils
 if __name__ == "__main__":
     config = hydra_utils.hydra_init("config/config.yaml")
     
-    paths = list(Path(config['paths']["data_path"]).rglob("*.root*"))[:1]
-    
-    vars, vars_all = utils.create_root_keys(config.variables)
-    
-    for path in paths:
-        tree = uproot.open(path)[config['tree']]
-        tree_keys = tree.keys()
-        
-        vars_all = [i for i in tree_keys if np.isin(vars_all, i.split('.')[0]).any() & (('/') not in i)]
-        
-        data = tree.arrays(vars+vars_all)
+    data = utils.get_data(config['paths']["data_path"], config.variables, config['tree'])
 
     # 5: b, 0: light, 4: c, 15: tau
     color_map = {5: 'skyblue', 0: 'red', 4: 'green', 15: 'purple'}
     scaling = 2
-    for i in range(1):
+    for i in tqdm(range(10)):
 
         labels = data['AnalysisJetsAuxDyn.HadronConeExclTruthLabelID'][i].to_numpy()
 
         # Map labels to colors
         colors = [color_map[label] for label in labels]
         
-
         plt.figure()
 
         plt.scatter(

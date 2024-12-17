@@ -15,6 +15,7 @@ AnalysisJetsAuxDyn: [
   JetConstitScaleMomentum_pt,
   JetConstitScaleMomentum_m,
   HadronConeExclTruthLabelID,
+  ConeTruthLabelID,
   ActiveArea4vec_eta,
   ActiveArea4vec_m,
   ActiveArea4vec_phi,
@@ -65,6 +66,7 @@ InDetTrackParticlesAuxDyn:
   , numberOfTRTOutliers
   , truthParticleLink/InDetTrackParticlesAuxDyn.truthParticleLink.m_persKey
   , truthParticleLink/InDetTrackParticlesAuxDyn.truthParticleLink.m_persIndex
+  # , truthParticleLink
   ]
 
 EventInfoAuxDyn: [
@@ -86,4 +88,19 @@ px,
 py,
 pz,
 e,
+]
+
+
+AntiKt4TruthDressedWZJetsAuxDyn: [
+  HadronConeExclTruthLabelID
+]
+
+
+PrimaryVerticesAuxDyn: [
+  neutralParticleLinks
+  , trackParticleLinks
+  , vertexType
+  , x
+  , 'y'
+  , z
 ]

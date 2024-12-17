@@ -2,6 +2,9 @@
 
 
 from pathlib import Path
+import uproot
+import numpy as np
+
 
 def get_all_files(path:str, extension:str) -> list:
     """
@@ -54,3 +57,30 @@ def create_root_keys(vars_dict: dict) -> list:
             vars_lst.extend([f'{key}.{i}' for i in lst])
 
     return vars_lst, vars_lst_all
+
+def get_data(root_paths: list | str, variable_list: list, tree_name: str):
+    """
+    Retrieve data from ROOT files.
+
+    Parameters:
+    root_paths (list): List of paths to search for ROOT files.
+    variable_list (list): List of variables to extract from the ROOT files.
+    tree_name (str): Name of the tree within the ROOT files to extract data from.
+
+    Returns:
+    dict: Dictionary containing the extracted data arrays.
+    """
+    if isinstance(root_paths, str):
+        root_paths = list(Path(root_paths).rglob("*.root*"))[:1]
+    
+    selected_vars, all_vars = create_root_keys(variable_list)
+    
+    for root_path in root_paths:
+        root_tree = uproot.open(root_path)[tree_name]
+        root_tree_keys = root_tree.keys()
+        
+        all_vars = [key for key in root_tree_keys if np.isin(all_vars, key.split('.')[0]).any() & (('/') not in key)]
+        
+        tree_data = root_tree.arrays(selected_vars + all_vars)
+
+    return tree_data
