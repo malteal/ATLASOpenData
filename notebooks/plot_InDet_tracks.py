@@ -1,5 +1,9 @@
 
 # built-in packages
+import pyrootutils
+
+root = pyrootutils.setup_root(search_from=__file__, pythonpath=True)
+
 from glob import glob
 
 # external packages
@@ -14,15 +18,16 @@ import awkward as ak
 
 # internal packages
 from src import physics as phy
-from src import utils
+from src import root_utils
 
 # own packages
 from tools import misc, hydra_utils
 
 if __name__ == "__main__":
-    config = hydra_utils.hydra_init("config/config.yaml")
+    config = hydra_utils.hydra_init("../config/config.yaml")
     
-    data = utils.get_data(config['paths']["data_path"], config.variables, config['tree'])
+    data = root_utils.load_root(config['paths']["data_path"], 
+                                config.variables, config['tree'])
 
     # 5: b, 0: light, 4: c, 15: tau
     color_map = {5: 'skyblue', 0: 'red', 4: 'green', 15: 'purple'}

@@ -1,0 +1,19 @@
+
+
+TruthTopAuxDyn: [
+  m,
+px,
+py,
+pz,
+e,
+]
+
+AntiKt4TruthDressedWZJetsAuxDyn: [
+  HadronConeExclTruthLabelID
+]
+
+
+AnalysisJetsAuxDyn: [
+  HadronConeExclTruthLabelID,
+  ConeTruthLabelID,
+  ]

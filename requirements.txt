@@ -37,3 +37,6 @@ ipykernel
 # workflow
 snakemake-executor-plugin-slurm==0.4.1 
 snakemake==8.4.1
+
+# to download opendataset
+cernopendata-client[pycurl]

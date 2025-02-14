@@ -1,7 +1,6 @@
 
-configfile: "/home/users/a/algren/work/atlas_open_data/workflow/config/download_files.yaml"
+configfile: "/home/users/a/algren/work/ATLASOpenData/workflow/config/download_files.yaml"
 workdir: config['workdir']
-# container: config["container_path"]
 pipeline = config['pipeline']
 
 command_to_get_locs = 'cernopendata-client  get-file-locations --recid'
@@ -24,4 +23,7 @@ for recid, out in out_get_locations.items():
         output:
             out
         shell:
-            f""" {command_to_get_locs} {{params.recid}} > {{output}}"""
+            f""" 
+             pip install cernopendata-client[pycurl] && 
+            {command_to_get_locs} {{params.recid}} > {{output}}
+            """

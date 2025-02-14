@@ -1,6 +1,9 @@
 
 
 
-glob_to_data: /srv/beegfs/scratch/groups/rodem/ATLASOpenData/physlite/
+glob_to_data: /srv/beegfs/scratch/groups/rodem/datasets/ATLASOpenData
 
-data_path: ${paths.glob_to_data}/80017/
+data_path: ${paths.glob_to_data}/testing_ttbar/
+# data_path: ${paths.glob_to_data}/testing_data/
+
+save_path: ${paths.glob_to_data}/dump_test/

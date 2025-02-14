@@ -5,7 +5,7 @@ jobs: 200 # Maximum number of jobs to run in parallel
 executor: slurm
 default-resources:
   slurm_account: golling
-  slurm_partition: public-cpu,public-bigmem,shared-cpu,shared-bigmem
+  slurm_partition: public-bigmem,shared-cpu,shared-bigmem
   runtime: 300 # minutes
   mem_mb: 32000
   threads: 4

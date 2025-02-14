@@ -1,5 +1,7 @@
 
-
+# defaults:
+#   - _self_  
+  # - TruthInfo
 # what is AuxDyn
 
 AnalysisMuonsAuxDyn: [
@@ -14,8 +16,8 @@ AnalysisJetsAuxDyn: [
   JetConstitScaleMomentum_phi,
   JetConstitScaleMomentum_pt,
   JetConstitScaleMomentum_m,
-  HadronConeExclTruthLabelID,
-  ConeTruthLabelID,
+  # HadronConeExclTruthLabelID,
+  # ConeTruthLabelID,
   ActiveArea4vec_eta,
   ActiveArea4vec_m,
   ActiveArea4vec_phi,
@@ -64,9 +66,8 @@ InDetTrackParticlesAuxDyn:
   , vz
   , numberOfTRTHits
   , numberOfTRTOutliers
-  , truthParticleLink/InDetTrackParticlesAuxDyn.truthParticleLink.m_persKey
-  , truthParticleLink/InDetTrackParticlesAuxDyn.truthParticleLink.m_persIndex
-  # , truthParticleLink
+  # , truthParticleLink/InDetTrackParticlesAuxDyn.truthParticleLink.m_persKey
+  # , truthParticleLink/InDetTrackParticlesAuxDyn.truthParticleLink.m_persIndex
   ]
 
 EventInfoAuxDyn: [
@@ -74,27 +75,13 @@ EventInfoAuxDyn: [
   ,mcEventNumber
   ,actualInteractionsPerCrossing
   ,averageInteractionsPerCrossing
-  ,RandomRunNumber
+  # ,RandomRunNumber
   ,mcChannelNumber
-  ,PileupWeight_NOSYS
+  # ,PileupWeight_NOSYS
   ,runNumber
   ,lumiBlock
   ,mcEventWeights
   ]
-
-TruthTopAuxDyn: [
-  m,
-px,
-py,
-pz,
-e,
-]
-
-
-AntiKt4TruthDressedWZJetsAuxDyn: [
-  HadronConeExclTruthLabelID
-]
-
 
 PrimaryVerticesAuxDyn: [
   neutralParticleLinks

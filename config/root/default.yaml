@@ -1,0 +1,8 @@
+
+defaults:
+  - _self_
+
+_target_: src.root_utils.load_root
+_partial_: true
+root_paths: ${paths.data_path}
+tree_name: ${tree}
