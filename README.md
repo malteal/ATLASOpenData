@@ -25,3 +25,6 @@ The processed files can be plotted in `evaluate/test_processed_files.py`
 # TODOs
 1. write smk so `run/extract_variables_and_dump.py` handle a single file
 2. afterwards write a merge scripts that merge all h5 files from `run/extract_variables_and_dump.py`
+
+3. Add scalar variables to h5 
+4. Add weighting scheme for MC
