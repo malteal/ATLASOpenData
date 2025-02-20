@@ -4,12 +4,12 @@
   # - TruthInfo
 # what is AuxDyn
 
-AnalysisMuonsAuxDyn: [
-  pt, eta, phi,
-]
-AnalysisElectronsAuxDyn: [
-  pt, eta, phi,
-]
+# AnalysisMuonsAuxDyn: [
+#   pt, eta, phi,
+# ]
+# AnalysisElectronsAuxDyn: [
+#   pt, eta, phi,
+# ]
 AnalysisJetsAuxDyn: [
   m, pt, eta, phi,
   JetConstitScaleMomentum_eta,

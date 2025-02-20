@@ -17,7 +17,10 @@ def merge_dict_of_lists(sample:dict[list]):
             merged[key] = np.concatenate((merged[key], d[key]))
     
     # Calculate the cumulative lengths of the arrays
-    lengths = [len(i['eta']) for i in sample]
+    keys = list(sample[0].keys())
+
+    lengths = [len(i[keys[0]]) for i in sample]
+
     culens = [0] + list(np.cumsum(lengths))
     
     return merged, culens

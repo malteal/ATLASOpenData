@@ -1,9 +1,12 @@
 
 
 
-glob_to_data: /srv/beegfs/scratch/groups/rodem/datasets/ATLASOpenData
+glob_to_data: /home/algren/work/data/ATLASOpenData/
 
-data_path: ${paths.glob_to_data}/testing_ttbar/
-# data_path: ${paths.glob_to_data}/testing_data/
+data_path: ${paths.glob_to_data}/data2016/
+save_path: ${paths.glob_to_data}/dump_data2016/
 
-save_path: ${paths.glob_to_data}/dump_test/
+# data_path: ${paths.glob_to_data}/top_nominal/
+# save_path: ${paths.glob_to_data}/dump_top_nominal/
+
+output_name: 'data2016'

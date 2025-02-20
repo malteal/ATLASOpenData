@@ -1,5 +1,13 @@
 # ATLASOpenData
 
+## Install correct snakemake
+- TODO: do a snakemake install 
+
+    snakemake-executor-plugin-slurm==0.4.1 
+
+    snakemake==8.4.1
+
+`pip install git+https://github.com/snakemake/snakemake`
 ## Download files
 ### Get path locations
 To download the files we use the `cernopendata-client` package.

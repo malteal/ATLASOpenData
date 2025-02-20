@@ -12,8 +12,10 @@ hydra:
 defaults:
   - _self_
   - paths: default.yaml
-  - variables: default.yaml
+  - variables_from_root: default.yaml
+  - variables_to_save: GN2.yaml
   - root: default.yaml
 
+maxevents: 100
 tree: CollectionTree;1
 style: FTAG # event

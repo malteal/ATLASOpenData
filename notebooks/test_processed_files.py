@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 
 if __name__ == '__main__':
-    file_path = Path('/srv/beegfs/scratch/groups/rodem/datasets/ATLASOpenData/dump_test/')
+    file_path = Path('/home/algren/work/data/ATLASOpenData/dump_top_nominal/')
     
     data = h5.File(file_path / 'data.h5', 'r')
     mc = h5.File(file_path / 'ttbar.h5', 'r')
