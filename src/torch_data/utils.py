@@ -2,8 +2,10 @@
 from dataclasses import dataclass
 from pathlib import Path
 from typing import TypedDict
+from collections.abc import Iterable
 
 from torch import Tensor
+from torch.utils.data import default_collate
 
 from constants import JETS_COLUMNS
 from src.torch_data.constants import CSTS_COLUMNS
@@ -50,3 +52,22 @@ class DataLoaderConfig:
     """DataLoader configuration."""
     num_workers: int
     pin_memory: bool = True
+
+
+def collate_and_transform(
+    batch: Iterable[dict],
+    do_default_collate: bool = True,
+    transforms: list[callable] | None = None,
+) -> dict:
+    """Collate the batch and apply the transforms.
+
+    Why this not lightning's on_before_batch_transfer?
+    This still runs inside the pytorch multiprocessing pool for data loading.
+    Thus it runs asynchonously for each batch being prepared.
+    """
+    if do_default_collate:
+        batch = default_collate(batch)
+    if transforms is not None:
+        for transform in transforms:
+            batch = transform(batch)
+    return batch

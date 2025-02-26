@@ -1,5 +1,6 @@
 from dataclasses import asdict
 import logging
+from functools import partial
 
 import numpy as np
 import torch
@@ -10,8 +11,8 @@ import h5py
 from lightning import LightningDataModule
 from torch.utils.data import DataLoader, Dataset
 
-from utils import StreamData, StreamDataConfig, DataPaths, DataLoaderConfig
-
+from utils import StreamData, StreamDataConfig, DataPaths, DataLoaderConfig, \
+    collate_and_transform
 
 logger = logging.getLogger(__name__)
 
@@ -199,7 +200,11 @@ class StreamModule(LightningDataModule):
                 start=self.batch_idx,
             ),
             batch_size=None,  # dataset returns a batches already!
-            collate_fn=None,
+            collate_fn=partial(
+                collate_and_transform,
+                do_default_collate=False,  # Already batched don't do it again
+                transforms=self.transforms,
+            ),
             **asdict(self._loader_config),  # type: ignore
         )
 
@@ -214,15 +219,6 @@ class StreamModule(LightningDataModule):
 
     def predict_dataloader(self) -> DataLoader:
         return self.test_dataloader()
-
-    def on_before_batch_transfer(self, batch: StreamData, dataloader_idx: int) -> StreamData:
-        """Update the last batch index during validation."""
-        if self.trainer.validating:
-            self.batch_idx = self.trainer.global_step // self.trainer.current_epoch
-        if self.transforms is not None:
-            for transform in self.transforms:
-                batch = transform(batch)
-        return batch
 
     def get_data_sample(self) -> StreamData:
         """Get a data sample to help initialise the network."""
