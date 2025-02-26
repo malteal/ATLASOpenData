@@ -38,11 +38,11 @@ def main(config):
     
     logging.info(f"Saving samples at {output_file}")
     with h5py.File(output_file, "w") as f:
-        f.create_dataset("csts", data=df_merged_tracks.values)
-        f.create_dataset("csts_columns", data=df_merged_tracks.columns.values.astype("S"))
+        f.create_dataset("tracks", data=df_merged_tracks.values)
+        f.create_dataset("tracks_columns", data=df_merged_tracks.columns.values.astype("S"))
         
         f.create_dataset("jets", data=df_jets.values)
-        f.create_dataset("jets_columns", data=df_merged_tracks.columns.values.astype("S"))
+        f.create_dataset("jets_columns", data=df_jets.columns.values.astype("S"))
 
         f.create_dataset("event_info", data=df_events.values)
         f.create_dataset("event_info_columns", data=df_events.columns.values.astype("S"))
