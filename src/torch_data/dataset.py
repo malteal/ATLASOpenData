@@ -22,8 +22,17 @@ def batch_idxes(
         num_jets: int,
         drop_last: bool = False,
         start: int = 0,
-) -> list:
-    """Construct a generator of batch indexes."""
+) -> list[int]:
+    """Get the indices for the batches.
+
+    Args:
+        batch_size: the size of the batch to create.
+        num_jets: the number of jets to create batches for.
+        drop_last: whether to drop the last batch if it is smaller than the batch size.
+        start: the starting index for the batches.
+
+    Returns: The indices for the batches.
+    """
     drop_last &= num_jets % batch_size != 0
     return list(range(start, num_jets - drop_last * batch_size, batch_size))
 
@@ -209,15 +218,19 @@ class StreamModule(LightningDataModule):
         )
 
     def train_dataloader(self) -> DataLoader:
+        """Get the training DataLoader."""
         return self.get_dataloader(self.train_set, "train")
 
     def val_dataloader(self) -> DataLoader:
+        """Get the validation DataLoader."""
         return self.get_dataloader(self.valid_set, "val")
 
     def test_dataloader(self) -> DataLoader:
+        """Get the test DataLoader."""
         return self.get_dataloader(self.test_set, "test")
 
     def predict_dataloader(self) -> DataLoader:
+        """Get the prediction DataLoader."""
         return self.test_dataloader()
 
     def get_data_sample(self) -> StreamData:
@@ -225,9 +238,11 @@ class StreamModule(LightningDataModule):
         return next(iter(self.valid_set))
 
     def load_state_dict(self, state_dict: dict) -> None:
+        """Load the state dictionary."""
         self.batch_idx = state_dict["batch_idx"]
 
     def state_dict(self) -> dict:
+        """Return the state dictionary."""
         return {"batch_idx": self.batch_idx}
 
     def get_n_classes(self) -> int:
