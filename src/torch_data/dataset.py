@@ -4,7 +4,7 @@ import logging
 import numpy as np
 import torch
 from typing import Callable
-from constants import CSTS_COLUMNS_LOOKUP, JETS_COLUMNS_LOOKUP
+from constants import TRACKS_COLUMNS_LOOKUP, JETS_COLUMNS_LOOKUP
 
 import h5py
 from lightning import LightningDataModule
@@ -38,23 +38,23 @@ class StreamDataset(Dataset):
             self,
             file_path: str,
             jet_features: list[str],
-            csts_features: list[str],
+            tracks_features: list[str],
             num_jets: int | None = None,
-            num_csts: int | None = None,
+            num_tracks: int | None = None,
             batch_size: int = 1000,
     ) -> None:
         """Creates a new StreamDataset.
 
         Args:
-            file_path:
-            jet_features:
-            csts_features:
-            num_jets:
-            num_csts:
-            batch_size:
+            file_path: The path to the HDF file.
+            jet_features: The features to extract from the jets.
+            tracks_features: The features to extract from the csts.
+            num_jets: The number of jets to read in.
+            num_tracks: The number of csts to read in.
+            batch_size: The number of jets to read in at a time.
         """
         self.jet_features = jet_features
-        self.csts_features = csts_features
+        self.tracks_features = tracks_features
         self.batch_size = batch_size
 
         # Open the file and calculate the length.
@@ -65,12 +65,12 @@ class StreamDataset(Dataset):
         self.jet_indices = [
             JETS_COLUMNS_LOOKUP[feature_name] for feature_name in jet_features
         ]
-        self.csts_indices = [
-            CSTS_COLUMNS_LOOKUP[feature_name] for feature_name in csts_features
+        self.tracks_indices = [
+            TRACKS_COLUMNS_LOOKUP[feature_name] for feature_name in tracks_features
         ]
 
         self.num_jets = self._get_num_jets(num_jets)
-        self.num_csts = self._get_num_csts(num_csts)
+        self.num_tracks = self._get_num_tracks(num_tracks)
 
     def _verify_features(self, jet_features: list[str], csts_features: list[str]) -> None:
         """Verify the features are present in the file."""
@@ -82,16 +82,18 @@ class StreamDataset(Dataset):
                 logger.warning(f"Feature {feature} not a recognized JETS column.")
 
         for feature in csts_features:
-            if feature not in CSTS_COLUMNS_LOOKUP:
+            if feature not in TRACKS_COLUMNS_LOOKUP:
                 logger.warning(f"Feature {feature} not a recognized CSTS column.")
 
     def _get_num_jets(self, num_jets: int | None) -> int:
+        """Returns the number of jets to read in."""
         file_len = len(self.length_indices) - 1  # Last index is the end of the file.
         if num_jets is None:
             return file_len
         return min(file_len, num_jets)
 
-    def _get_num_csts(self, num_csts: int | None) -> int:
+    def _get_num_tracks(self, num_csts: int | None) -> int:
+        """Returns the number of csts to read in."""
         file_len = len(self.length_indices) - 1  # Last index is the end of the file.
         if num_csts is None:
             return file_len
@@ -109,8 +111,8 @@ class StreamDataset(Dataset):
 
         jets = np.array(self.file["jets"][start_jet_idx: end_jet_idx])
         jets = jets[:, self.jet_indices]
-        csts = np.array(self.file["csts"][idx: idx_f])
-        csts = csts[:, self.csts_indices]
+        csts = np.array(self.file["tracks"][idx: idx_f])
+        csts = csts[:, self.tracks_indices]
         split = self.length_indices[idx: idx_f] - start_jet_idx
         return {
             "jets": torch.from_numpy(jets),
@@ -120,6 +122,11 @@ class StreamDataset(Dataset):
 
 
 class StreamModule(LightningDataModule):
+    """A LightningDataModule for streaming in data from HDF files.
+
+    This module is designed to work with the StreamDataset class which reads in data
+    from a single HDF file.
+    """
     def __init__(
             self,
             *,
@@ -129,6 +136,15 @@ class StreamModule(LightningDataModule):
             data_config: StreamDataConfig | None = None,
             transforms: list[Callable[[StreamData], StreamData]] | None = None,
     ) -> None:
+        """Creates a new StreamModule.
+
+        Args:
+            n_classes: The number of classes in the dataset.
+            data_paths: The paths to the data files.
+            loader_config: The configuration for the DataLoader.
+            data_config: The configuration for the StreamData.
+            transforms: The transforms to apply to the data.
+        """
         super().__init__()
 
         data_config = data_config if data_config is not None else StreamDataConfig()

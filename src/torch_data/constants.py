@@ -23,7 +23,7 @@ CSTS_COLUMNS = [
     "b'InDetTrackParticlesAuxDyn.eta'",
     "b'InDetTrackParticlesAuxDyn.pt'"
 ]
-CSTS_COLUMNS_LOOKUP = {s: idx for idx, s in enumerate(CSTS_COLUMNS)}
+TRACKS_COLUMNS_LOOKUP = {s: idx for idx, s in enumerate(CSTS_COLUMNS)}
 JETS_COLUMNS = [
     "b'InDetTrackParticlesAuxDyn.phi'",
     "b'InDetTrackParticlesAuxDyn.numberOfPixelHits'",
